@@ -4,15 +4,17 @@ import { UserModule } from '../module/user.module';
 import { DoctorModule } from '../module/doctor.module';
 import { Observable, from, BehaviorSubject } from 'rxjs';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
   
-
-  LoginUrl= "http://127.0.0.1/FindMyDoctor/Login.php";
-  DoctorSignUpUrl= "http://127.0.0.1/FindMyDoctor/DoctorSignUp.php";
-  UserSignUpUrl= "http://127.0.0.1/FindMyDoctor/UserSignUp.php";
+  HostUrl = environment.HostUrl;
+  LoginUrl= "/Login.php";
+  DoctorSignUpUrl= "/DoctorSignUp.php";
+  UserSignUpUrl= "/UserSignUp.php";
   constructor(private http: HttpClient) {
   }
 
@@ -32,7 +34,7 @@ export class AccountService {
     let body = new FormData();
     body.append('MobileNo', Mobile);
     body.append('Password', Pass);
-    return this.http.post<any>(this.LoginUrl,body).pipe();  
+    return this.http.post<any>(this.HostUrl+this.LoginUrl,body).pipe();  
   }
 
   UserSignUp(Mobile,Name,Pass,dateOfBirth,Gender):any{
@@ -42,7 +44,7 @@ export class AccountService {
       body.append('Password', Pass);
       body.append('DOB', dateOfBirth);
       body.append('Gender', Gender);
-    return this.http.post<any>(this.UserSignUpUrl,body)
+    return this.http.post<any>(this.HostUrl+this.UserSignUpUrl,body)
       .pipe();  
   }
   DoctorSignUp(Mobile,Name,Pass,address,latitude,longitude,speciality,hospital_Name,
@@ -59,7 +61,7 @@ export class AccountService {
       body.append('Consultation_Fee', consultation_Fee);
       body.append('Opning_Time', opning_Time);
       body.append('Closing_Time', closing_Time);
-    return this.http.post<any>(this.DoctorSignUpUrl,body)
+    return this.http.post<any>(this.HostUrl+this.DoctorSignUpUrl,body)
       .pipe();  
   }
 }

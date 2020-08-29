@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { DoctorModule } from '../module/doctor.module';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DoctorService {
 
-  MyAppointmentUrl : string = "http://localhost/FindMyDoctor/DoctorAppointment.php";
-  ResponseAppointmentUrl : string = "http://localhost/FindMyDoctor/ResponseAppointment.php";
+  HostUrl = environment.HostUrl;
+  MyAppointmentUrl : string = "/DoctorAppointment.php";
+  ResponseAppointmentUrl : string = "/ResponseAppointment.php";
   Doctor:DoctorModule;
   constructor(private http : HttpClient) {
     this.Doctor = <DoctorModule>JSON.parse(localStorage.getItem('currentDoctor'));
@@ -21,7 +23,7 @@ export class DoctorService {
   myAppointment(){
     let body = new FormData();
     body.append('Mobile', this.Doctor.Mobile_No);
-    return this.http.post<any>(this.MyAppointmentUrl,body).pipe();
+    return this.http.post<any>(this.HostUrl+this.MyAppointmentUrl,body).pipe();
   }
   
   ResponseAppointment(User_Mobile:string,Doctor_Mobile:string,Date_Time:string,Status:string){
@@ -30,6 +32,6 @@ export class DoctorService {
     body.append('Doctor_Mobile', Doctor_Mobile);
     body.append('Date_Time', Date_Time);
     body.append('Status', Status);
-    return this.http.post<any>(this.ResponseAppointmentUrl,body).pipe();
+    return this.http.post<any>(this.HostUrl+this.ResponseAppointmentUrl,body).pipe();
   }
 }

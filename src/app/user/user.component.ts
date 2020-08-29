@@ -8,9 +8,8 @@ import { Router } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
-  TagName : string = "MyAppointment";
+  TagName : string = "Home";
   constructor(private router : Router) { 
-    this.GoTo('/user/MyAppointment');
   }
 
   ngOnInit(): void {

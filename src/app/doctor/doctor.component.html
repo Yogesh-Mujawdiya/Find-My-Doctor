@@ -1,0 +1,10 @@
+<mat-divider></mat-divider>
+<section>
+    <mat-button-toggle-group [(ngModel)]="TagName" (change)="changeValue()"  name="TagName" aria-label="Font Style">
+        <mat-button-toggle [disabled]='doctor.Status!="Approved"' value="AppointmentRequest">Appointment Request</mat-button-toggle>
+        <mat-button-toggle value="Home">Home</mat-button-toggle>
+        <mat-button-toggle [disabled]='doctor.Status!="Approved"' value="AppointmentList">Appointment List</mat-button-toggle>
+    </mat-button-toggle-group>
+</section>
+<mat-divider></mat-divider>
+<router-outlet></router-outlet>

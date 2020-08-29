@@ -1,0 +1,10 @@
+<mat-divider></mat-divider>
+<section>
+    <mat-button-toggle-group [(ngModel)]="TagName" name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle (click)="GoTo('/user/MyAppointment')" value="MyAppointment">My Appointment</mat-button-toggle>
+        <mat-button-toggle (click)="GoTo('/user')" value="Home">Home</mat-button-toggle>
+        <mat-button-toggle (click)="GoTo('/user/SearchDoctor')" value="SearchDoctor">Find Doctor</mat-button-toggle>
+    </mat-button-toggle-group>
+</section>
+<mat-divider></mat-divider>
+<router-outlet></router-outlet>

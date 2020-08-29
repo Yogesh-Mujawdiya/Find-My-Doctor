@@ -1,7 +1,100 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminComponent } from './admin/admin.component'
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component'
+import { DoctorRegistrationApprovelComponent } from './admin/doctor-registration-approvel/doctor-registration-approvel.component'
+import { AccountComponent } from './account/account.component';
+import { AccountHomeComponent } from './account/account-home/account-home.component';
+import { LoginComponent } from './account/login/login.component';
+import { SignUpComponent } from './account/sign-up/sign-up.component';
+import { ProfileComponent } from './account/profile/profile.component';
+import { NotificationsHandlingComponent } from './admin/notifications-handling/notifications-handling.component';
+import { DoctorComponent } from './doctor/doctor.component';
+import { DoctorHomeComponent } from './doctor/doctor-home/doctor-home.component';
+import { AppointmentListComponent } from './doctor/appointment-list/appointment-list.component';
+import { AppointmentRequestComponent } from './doctor/appointment-request/appointment-request.component';
+import { UserHomeComponent } from './user/user-home/user-home.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
+import { HomeComponent } from './home/home.component';
+import { UserComponent } from './user/user.component';
+import { FindDoctorComponent } from './user/find-doctor/find-doctor.component';
+import { MyAppointmentComponent } from './user/my-appointment/my-appointment.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', component:HomeComponent},
+  { path: 'Account', component: AccountComponent ,
+    children: [
+      {
+        path: '',
+        component: AccountHomeComponent
+      },
+      {
+        path: 'Login',
+        component: LoginComponent
+      },
+      {
+        path: 'SignUp',
+        component: SignUpComponent
+      },
+      {
+        path: 'Profile',
+        component: ProfileComponent
+      }
+    ]
+  },
+  { path: 'admin', component: AdminComponent ,
+    children: [
+      {
+        path: '',
+        component: AdminHomeComponent
+      },
+      {
+        path: 'DoctorRegistrationRequest',
+        component: DoctorRegistrationApprovelComponent
+      },
+      {
+        path: 'Notification',
+        component: NotificationsHandlingComponent
+      }
+    ]
+  },
+  { path: 'doctor', component: DoctorComponent ,
+    children: [
+      {
+        path: '',
+        component: DoctorHomeComponent
+      },
+      {
+        path: 'AppointmentRequest',
+        component: AppointmentRequestComponent
+      },
+      {
+        path: 'AppointmentList',
+        component: AppointmentListComponent
+      }
+    ]
+  },
+  { path: 'user', component: UserComponent ,
+    children: [
+      {
+        path: '',
+        component: UserHomeComponent
+      },
+      {
+        path: 'SearchDoctor',
+        component: FindDoctorComponent
+      },
+      {
+        path: 'MyAppointment',
+        component: MyAppointmentComponent
+      }
+    ]
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent 
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,0 +1,10 @@
+mat-tab-group{
+    margin: auto;
+    max-width: 500px;
+}
+mat-tab{
+    margin: 1%;
+}
+mat-card{
+    margin: 20px;
+}

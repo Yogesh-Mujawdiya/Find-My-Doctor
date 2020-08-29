@@ -1,0 +1,25 @@
+mat-card{
+    margin: 20px;
+    max-width: 500px;
+    margin: auto;
+}
+
+mat-card-content{
+    text-align: center;
+    margin: 10px;
+}
+mat-form-field{
+    width: 75%;
+}
+.Btn{
+    margin: 25px;
+    min-width: 200px;
+}
+.header-image {
+    background-image: url('../../../assets/img/login.png');
+    background-size: cover;
+  }
+
+  mat-card-actions{
+      text-align: center;
+  }

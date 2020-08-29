@@ -1,0 +1,48 @@
+<form style="text-align: center;">
+    <mat-form-field appearance="outline" style="width: 80%;">
+        <mat-label>Search</mat-label>
+        <input matInput type="text" name="search" [(ngModel)]="searchText" 
+        autocomplete="off" placeholder="Search Doctor By : Hospital Name / Dr. Name  / Speciality / Address">
+        <button mat-icon-button matSuffix>
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
+</form>
+<mat-card *ngFor="let obj of AllDoctor | filter:searchText;">
+    <mat-card-header>
+        <mat-card-title>{{obj.Hospital_Name}}</mat-card-title>
+        <mat-card-subtitle>Dr. {{obj.Full_Name}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>    
+    <mat-card-content>
+        <table>
+            <tr>
+                <td>Speciality</td><td>:</td>
+                <td>{{obj.Speciality}}</td>
+            </tr>
+            <tr>
+                <td>Opning_Time</td><td>:</td>
+                <td>{{obj.Opning_Time}}</td>
+            </tr>
+            <tr>
+                <td>Closing_Time</td><td>:</td>
+                <td>{{obj.Closing_Time}}</td>
+            </tr>
+            <tr>
+                <td>Consultation Fee</td><td>:</td>
+                <td>{{obj.Consultation_Fee}}</td>
+            </tr>
+            <tr>
+                <td>Contact No</td><td>:</td>
+                <td>{{obj.Mobile_No}}</td>
+            </tr>
+            <tr>
+                <td>Address</td><td>:</td>
+                <td>{{obj.Address}}</td>
+            </tr>
+        </table>
+    </mat-card-content>
+    <mat-card-actions align='end'>
+        <button mat-raised-button class="Btn"  color="primary" (click)="SetAppointment(obj)">Set Appointment</button>
+    </mat-card-actions>
+</mat-card>

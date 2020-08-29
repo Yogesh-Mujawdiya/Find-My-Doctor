@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>{{data.Hospital_Name}}</h1>
+<div mat-dialog-content>
+  Full Name : {{data.Full_Name}}<br>
+  Speciality : {{data.Speciality}}<br>
+  Speciality : {{data.Speciality}}<br>
+  Time<br>
+  From  : {{data.Opning_Time}} To {{data.Closing_Time}}<br>
+  Consultation Fee : {{data.Consultation_Fee}}<br>
+  <mat-form-field appearance="outline">
+    <mat-label>At Time</mat-label>
+    <input matInput type="datetime-local" name="DateTime" [(ngModel)]="DateTime" required>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()" color="primary">No Thanks</button>
+  <button mat-raised-button (click)="SetAppointment()" cdkFocusInitial color="primary">Appointment</button>
+</div>

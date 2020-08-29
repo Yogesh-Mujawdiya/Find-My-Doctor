@@ -1,0 +1,123 @@
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Pending"> 
+        <mat-card *ngFor="let obj of PendingDoctor;">
+            <mat-card-header>
+                <mat-card-title>{{obj.Hospital_Name}}</mat-card-title>
+                <mat-card-subtitle>Dr. {{obj.Full_Name}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>    
+            <mat-card-content>
+                <table>
+                    <tr>
+                        <td>Speciality</td><td>:</td>
+                        <td>{{obj.Speciality}}</td>
+                    </tr>
+                    <tr>
+                        <td>Opning_Time</td><td>:</td>
+                        <td>{{obj.Opning_Time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Closing_Time</td><td>:</td>
+                        <td>{{obj.Closing_Time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Consultation Fee</td><td>:</td>
+                        <td>{{obj.Consultation_Fee}}</td>
+                    </tr>
+                    <tr>
+                        <td>Contact No</td><td>:</td>
+                        <td>{{obj.Mobile_No}}</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td><td>:</td>
+                        <td>{{obj.Address}}</td>
+                    </tr>
+                </table>
+            </mat-card-content>    
+            <mat-card-actions align='end'>
+                <button mat-raised-button class="Btn"  color="warn" (click)="ResponseRegistrationRequest(obj,'Not Approved')">Not Accept</button>
+                <button mat-raised-button class="Btn"  color="primary" (click)="ResponseRegistrationRequest(obj,'Approved')">Accept</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Approved">
+        <mat-card *ngFor="let obj of ApprovedDoctor;">
+            <mat-card-header>
+                <mat-card-title>{{obj.Hospital_Name}}</mat-card-title>
+                <mat-card-subtitle>Dr. {{obj.Full_Name}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>    
+            <mat-card-content>
+                <table>
+                    <tr>
+                        <td>Speciality</td><td>:</td>
+                        <td>{{obj.Speciality}}</td>
+                    </tr>
+                    <tr>
+                        <td>Opning_Time</td><td>:</td>
+                        <td>{{obj.Opning_Time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Closing_Time</td><td>:</td>
+                        <td>{{obj.Closing_Time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Consultation Fee</td><td>:</td>
+                        <td>{{obj.Consultation_Fee}}</td>
+                    </tr>
+                    <tr>
+                        <td>Contact No</td><td>:</td>
+                        <td>{{obj.Mobile_No}}</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td><td>:</td>
+                        <td>{{obj.Address}}</td>
+                    </tr>
+                </table>
+            </mat-card-content>    
+            <mat-card-actions align='end'>
+                <button mat-raised-button class="Btn"  color="warn" (click)="ResponseRegistrationRequest(obj,'Not Approved')">Cancle</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Not Approved">
+        <mat-card *ngFor="let obj of NotApprovedDoctor;">
+            <mat-card-header>
+                <mat-card-title>{{obj.Hospital_Name}}</mat-card-title>
+                <mat-card-subtitle>Dr. {{obj.Full_Name}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>    
+            <mat-card-content>
+                <table>
+                    <tr>
+                        <td>Speciality</td><td>:</td>
+                        <td>{{obj.Speciality}}</td>
+                    </tr>
+                    <tr>
+                        <td>Opning_Time</td><td>:</td>
+                        <td>{{obj.Opning_Time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Closing_Time</td><td>:</td>
+                        <td>{{obj.Closing_Time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Consultation Fee</td><td>:</td>
+                        <td>{{obj.Consultation_Fee}}</td>
+                    </tr>
+                    <tr>
+                        <td>Contact No</td><td>:</td>
+                        <td>{{obj.Mobile_No}}</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td><td>:</td>
+                        <td>{{obj.Address}}</td>
+                    </tr>
+                </table>
+            </mat-card-content>
+            <mat-card-actions align='end'>
+                <button mat-raised-button class="Btn"  color="primary" (click)="ResponseRegistrationRequest(obj,'Approved')">Accept</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+</mat-tab-group>

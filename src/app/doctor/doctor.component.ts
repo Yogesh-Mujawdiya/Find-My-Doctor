@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DoctorService } from '../service/doctor.service';
 import { DoctorModule } from '../module/doctor.module';
+import { AccountService } from '../service/account.service';
 
 @Component({
   selector: 'app-doctor',
@@ -13,8 +14,11 @@ export class DoctorComponent implements OnInit {
   TagName : string = "Home";
   doctor:DoctorModule;
   constructor(private router : Router,
-    private doctorService:DoctorService) { 
-      this.doctor = doctorService.getDoctor();
+    private doctorService:DoctorService,
+    private accountService:AccountService){
+    if(accountService.getUserType()!="Doctor")
+      this.router.navigateByUrl('');
+    this.doctor = doctorService.getDoctor();
   }
 
   ngOnInit(): void {

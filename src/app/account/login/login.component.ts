@@ -11,14 +11,19 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   hide = true;
-  Mobile_No : string;
-  Password :string;
+  Mobile_No : string ='';
+  Password :string ='';
+  IsProgressing : boolean;
   
   constructor(private accountService:AccountService,
     private snackBar: MatSnackBar,
-    private router: Router) { }
+    private router: Router) {   
+      if(accountService.isLogin())
+        this.router.navigateByUrl('');
+    }
 
   ngOnInit(): void {
+    
   }
   
   openSnackBar(message: string, action: string) {
@@ -29,9 +34,11 @@ export class LoginComponent implements OnInit {
 
 
   Login(){
+    if(this.Mobile_No=='' || this.Password=='')
+      return;
+    this.IsProgressing=true;
     this.accountService.Login(this.Mobile_No,this.Password).subscribe(
       data=>{
-        console.log(data);
         if(data.status=="Success"){
           this.openSnackBar(data.status,data.message);
           localStorage.setItem('currentUserType', data.UserType);
@@ -50,6 +57,7 @@ export class LoginComponent implements OnInit {
         else{
           this.openSnackBar(data.message,"Error")
         }
+        this.IsProgressing=false;
       });
   }
   

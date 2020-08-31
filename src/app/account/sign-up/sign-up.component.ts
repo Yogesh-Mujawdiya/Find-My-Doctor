@@ -6,6 +6,7 @@ import {map, startWith} from 'rxjs/operators';
 import { AccountService } from '../../service/account.service';
 import { DatePipe } from '@angular/common';
 import { _SnackBarContainer, MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -27,7 +28,7 @@ export class SignUpComponent implements OnInit {
   Consultation_Fee : string;
   Open_Time : string;
   Close_Time : string;
-  
+  IsProgressing:boolean;
   myControl = new FormControl();
   options: string[] = ['DM Neurologist', 'Neurosurgeon', 'Psychiatrist'];
   filteredOptions: Observable<string[]>;
@@ -36,7 +37,11 @@ export class SignUpComponent implements OnInit {
   constructor(private locationService:LocationServiceService,
     private accountService : AccountService,
     private datePipe:DatePipe,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private router: Router) { 
+      if(accountService.isLogin())
+        this.GoTo('');
+    }
 
   ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -71,19 +76,31 @@ export class SignUpComponent implements OnInit {
       });
   }
 
+  
+
+  GoTo(Url:string){
+    this.router.navigateByUrl(Url);
+  }
+
   SignUp(){
+    if(this.Mobile_No=='' || this.Name=='' || this.Password =='')
+      return;
     if(this.UserType=="Doctor"){
+      if(this.Address=='' || this.Speciality=='' ||this.Hospital_Name=='' || this.Consultation_Fee=='' || this.Open_Time=='' || this.Close_Time=='')
+        return;
       this.locationService.getCordinate(this.Address).subscribe(
         data =>{
           let C = data.candidates[0].location;
-          console.log(C.x,C.y);
+          this.IsProgressing=true;
           this.DoctorSignup(C.x,C.y);
         }
       );
       
     }
-    else
+    else{
+      this.IsProgressing = true;
       this.UserSignup();
+    }
   }
 
   DoctorSignup(latitude,longitude){
@@ -91,8 +108,8 @@ export class SignUpComponent implements OnInit {
       this.Password,this.Address,latitude,longitude,this.Speciality,this.Hospital_Name,
       this.Consultation_Fee,this.Open_Time,this.Close_Time).subscribe(
         data=>{
-          console.log(data);
-          this.openSnackBar(data.status,data.message);
+          this.IsProgressing=false;
+          this.openSnackBar(data.message,data.status);
         });
   }
 
@@ -101,8 +118,8 @@ export class SignUpComponent implements OnInit {
     this.accountService.UserSignUp(this.Mobile_No,this.Name,
       this.Password,DOB,this.Gender).subscribe(
         data=>{
-          console.log(data);
-          this.openSnackBar(data.status,data.message);
+          this.IsProgressing=false;
+          this.openSnackBar(data.message,data.status);
         });
   }
 

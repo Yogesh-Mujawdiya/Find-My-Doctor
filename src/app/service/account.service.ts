@@ -17,6 +17,13 @@ export class AccountService {
   UserSignUpUrl= "/UserSignUp.php";
   constructor(private http: HttpClient) {
   }
+  
+  isLogin():boolean{
+    if(localStorage.getItem('currentUserType')==null)
+      return false;
+    else
+      return true;
+  }
 
   getUserType():string{
     return localStorage.getItem('currentUserType');

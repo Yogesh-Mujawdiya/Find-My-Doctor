@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/service/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private accountService:AccountService,
+    private router: Router) {
+    if(!accountService.isLogin())
+      this.GoTo('');
+  }
 
   ngOnInit(): void {
   }
 
+  
+  GoTo(Url:string){
+    this.router.navigateByUrl(Url);
+  }
 }

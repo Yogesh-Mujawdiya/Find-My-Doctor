@@ -9,7 +9,7 @@ import { subscribeOn } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-find-doctor',
+    selector: 'app-dialog-appointment',
     templateUrl: './dialog-appointment.component.html',
     styleUrls: ['./dialog-appointment.component.css']
 })

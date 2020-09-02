@@ -28,6 +28,8 @@ export class LocationServiceService {
 
   }
 
+  
+
   getAddress(lng:string,lat:string):any{
     let body = new FormData();
     body.append('lng', lng);

@@ -25,6 +25,15 @@
     </mat-toolbar>
 </header>
 <mat-divider style="margin-top: 60px; margin-bottom: 25px;"></mat-divider>
+<div *ngIf="isUser">
+    <section>
+        <mat-button-toggle-group [(ngModel)]="TagName" name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle (click)="GoTo('/user/Appointment')" value="MyAppointment">My Appointment</mat-button-toggle>
+            <mat-button-toggle (click)="GoTo('')" value="SearchDoctor">Find Doctor</mat-button-toggle>
+        </mat-button-toggle-group>
+    </section>
+    <mat-divider></mat-divider>
+</div>
 <router-outlet></router-outlet>
 
 <mat-divider style="margin-top: 20px; margin-bottom: 10px;"></mat-divider>

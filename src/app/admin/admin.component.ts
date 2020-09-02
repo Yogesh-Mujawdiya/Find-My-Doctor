@@ -16,8 +16,10 @@ export class AdminComponent implements OnInit {
   constructor(private router : Router,
     private adminService:AdminService,
     private accountService:AccountService) { 
-      if(accountService.getUserType()!="Admin")
-        this.router.navigateByUrl('');
+      setInterval(() => {
+        if(this.accountService.getUserType()!='Admin')
+          this.router.navigateByUrl('');
+      }, 100);
   }
 
   ngOnInit(): void {

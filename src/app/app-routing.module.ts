@@ -13,7 +13,6 @@ import { DoctorComponent } from './doctor/doctor.component';
 import { DoctorHomeComponent } from './doctor/doctor-home/doctor-home.component';
 import { AppointmentListComponent } from './doctor/appointment-list/appointment-list.component';
 import { AppointmentRequestComponent } from './doctor/appointment-request/appointment-request.component';
-import { UserHomeComponent } from './user/user-home/user-home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
@@ -59,33 +58,25 @@ const routes: Routes = [
     ]
   },
   { path: 'doctor', component: DoctorComponent ,
-    children: [
-      {
-        path: '',
-        component: DoctorHomeComponent
-      },
-      {
-        path: 'AppointmentRequest',
-        component: AppointmentRequestComponent
-      },
-      {
-        path: 'AppointmentList',
-        component: AppointmentListComponent
-      }
-    ]
+    // children: [
+    //   {
+    //     path: '',
+    //     component: DoctorHomeComponent
+    //   },
+    //   {
+    //     path: 'AppointmentRequest',
+    //     component: AppointmentRequestComponent
+    //   },
+    //   {
+    //     path: 'AppointmentList',
+    //     component: AppointmentListComponent
+    //   }
+    // ]
   },
   { path: 'user', component: UserComponent ,
     children: [
       {
-        path: '',
-        component: UserHomeComponent
-      },
-      {
-        path: 'SearchDoctor',
-        component: FindDoctorComponent
-      },
-      {
-        path: 'MyAppointment',
+        path: 'Appointment',
         component: MyAppointmentComponent
       }
     ]

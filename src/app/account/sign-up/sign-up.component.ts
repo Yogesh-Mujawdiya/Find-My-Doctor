@@ -16,21 +16,25 @@ import { Router } from '@angular/router';
 export class SignUpComponent implements OnInit {
 
   hide = true;
-  Address : string;
+  Address : string = '';
   UserType : string = "Customer";
   Gender : string="M";
-  Mobile_No : string;
+  Mobile_No : string = '';
   Date_of_Birth : Date;
-  Name : string;
-  Speciality : string;
-  Password : string;
-  Hospital_Name : string;
-  Consultation_Fee : string;
-  Open_Time : string;
-  Close_Time : string;
+  Name : string = '';
+  Speciality : string = '';
+  Password : string = '';
+  Hospital_Name : string = '';
+  Consultation_Fee : string = '';
+  Open_Time : string = '';
+  Close_Time : string = '';
   IsProgressing:boolean;
   myControl = new FormControl();
-  options: string[] = ['DM Neurologist', 'Neurosurgeon', 'Psychiatrist'];
+  options: string[] = [
+    'Physician','Physician (Ayurvedic)','Physician (Homeopathy)',
+    'Cardiologist','Neurologist','Gastroenterologist','Orthopedic',
+    'Dermatologist','Gynaecologist','Psychologist','Oncologist','Others'
+  ];
   filteredOptions: Observable<string[]>;
 
   
@@ -88,10 +92,14 @@ export class SignUpComponent implements OnInit {
     if(this.UserType=="Doctor"){
       if(this.Address=='' || this.Speciality=='' ||this.Hospital_Name=='' || this.Consultation_Fee=='' || this.Open_Time=='' || this.Close_Time=='')
         return;
+      if(this.options.indexOf(this.Speciality)==-1){
+        this.openSnackBar("If Dr. Speciality is not Available Select Others","Error")
+        return;
+      }
+      this.IsProgressing=true;
       this.locationService.getCordinate(this.Address).subscribe(
         data =>{
           let C = data.candidates[0].location;
-          this.IsProgressing=true;
           this.DoctorSignup(C.x,C.y);
         }
       );
@@ -110,6 +118,7 @@ export class SignUpComponent implements OnInit {
         data=>{
           this.IsProgressing=false;
           this.openSnackBar(data.message,data.status);
+          this.GoTo('Account/Login');
         });
   }
 
@@ -120,6 +129,7 @@ export class SignUpComponent implements OnInit {
         data=>{
           this.IsProgressing=false;
           this.openSnackBar(data.message,data.status);
+          this.GoTo('Account/Login');
         });
   }
 

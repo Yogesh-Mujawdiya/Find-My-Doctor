@@ -61,7 +61,6 @@ import { AccountHomeComponent } from './account/account-home/account-home.compon
 import { DoctorHomeComponent } from './doctor/doctor-home/doctor-home.component';
 import { FindDoctorComponent } from './user/find-doctor/find-doctor.component';
 import { MyAppointmentComponent } from './user/my-appointment/my-appointment.component';
-import { UserHomeComponent } from './user/user-home/user-home.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -95,7 +94,6 @@ import { AppointmentRequestComponent } from './doctor/appointment-request/appoin
     AppointmentRequestComponent,
     FindDoctorComponent,
     MyAppointmentComponent,
-    UserHomeComponent,
     FooterComponent,
     PageNotFoundComponent,
     HomeComponent,

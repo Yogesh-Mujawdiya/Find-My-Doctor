@@ -14,8 +14,11 @@ export class DoctorModule {
   Address:string;
   Speciality:string;
   Hospital_Name:string;
-  Consultation_Fee:string;
+  Consultation_Fee:number;
   Opning_Time:string;
   Closing_Time:string;  
+  Latitude : number;
+  Longitude :number;
   Status:string;
+  Distance:number;
 }

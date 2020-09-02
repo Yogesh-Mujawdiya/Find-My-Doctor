@@ -14,8 +14,13 @@ export class UserComponent implements OnInit {
     private accountService:AccountService) { 
       if(accountService.getUserType()!="User")
         this.router.navigateByUrl(''); 
-  }
+      
+    setInterval(() => {
+      if(this.accountService.getUserType()!='User')
+        this.router.navigateByUrl('');
+    }, 100);
 
+  }
   ngOnInit(): void {
   }
   

@@ -16,8 +16,10 @@ export class DoctorComponent implements OnInit {
   constructor(private router : Router,
     private doctorService:DoctorService,
     private accountService:AccountService){
-    if(accountService.getUserType()!="Doctor")
-      this.router.navigateByUrl('');
+    setInterval(() => {
+      if(this.accountService.getUserType()!='Doctor')
+        this.router.navigateByUrl('');
+    }, 100);
     this.doctor = doctorService.getDoctor();
   }
 

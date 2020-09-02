@@ -3,7 +3,7 @@ import { Router , Event, NavigationStart, NavigationEnd } from '@angular/router'
 import { AccountService } from './service/account.service';
 import { CommonService } from './service/common.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NotificationModule } from './module/notification.module'
+import { NotificationModule } from './module/notification.module';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,24 +13,35 @@ export class AppComponent {
   title = 'Find-My-Doctor';
   Notification:NotificationModule[];
   isUserLogin : boolean;
+  isUser:boolean;
+  TagName : string = "SearchDoctor";
 
   constructor(private accountService:AccountService,
     private commonService:CommonService,
     private router: Router) { 
       this.updateData();
-      router.events.forEach((event) => {
-        if(event instanceof NavigationStart) {
-          if(this.accountService.getUserType()!=null)
-            this.isUserLogin=true;
-          else
-            this.isUserLogin=false;
-        }
-      });
+      // router.events.forEach((event) => {
+      //   if(event instanceof NavigationStart) {
+      //     if(this.accountService.getUserType()!=null)
+      //       this.isUserLogin=true;
+      //     else
+      //       this.isUserLogin=false;
+      //   }
+      // });
+      setInterval(() => {
+        this.UpdateLoginInfo();
+      }, 100);
   }
 
+  UpdateLoginInfo(){
+    if(this.isUserLogin!==this.accountService.isLogin()){
+      this.updateData();
+    }
+  }
+  
   updateData(){
     if(this.accountService.getUserType()!=null){
-      this.isUserLogin=true;
+      this.isUserLogin = true;
       if(this.accountService.getUserType()=='Doctor'){
         this.router.navigateByUrl('doctor');
         this.commonService.getDoctorNotification().subscribe(data=>{
@@ -39,7 +50,8 @@ export class AppComponent {
         });
       }
       else if(this.accountService.getUserType()=='User'){
-        this.router.navigateByUrl('user');
+        this.isUser=true;
+        this.router.navigateByUrl('');
         this.commonService.getUserNotification().subscribe(data=>{
           this.Notification = <NotificationModule[]>data.NotificationList;
           this.Notification.sort(this.SortByDate);
@@ -53,8 +65,10 @@ export class AppComponent {
         });
       }
     }
-    else
+    else{
+      this.isUser=false;
       this.isUserLogin=false;
+    }
   }
 
   SortByDate(a:NotificationModule,b:NotificationModule):number{
@@ -71,7 +85,7 @@ export class AppComponent {
 
   Logout(){
     localStorage.clear();
-    this.router.navigateByUrl('');
+    location.reload();
   }
 
 }

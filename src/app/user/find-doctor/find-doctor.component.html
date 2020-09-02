@@ -1,20 +1,45 @@
+
+
 <form style="text-align: center;">
     <mat-form-field appearance="outline" style="width: 80%;">
+        <mat-label>Choose Doctor Specialization</mat-label>
+        <mat-select name='SelectedSpeciality' [(ngModel)]="SelectedSpeciality" (selectionChange)="ChangeSpeciality()">
+            <mat-option *ngFor="let S of Speciality" [value]="S">
+            {{S}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf='SelectedSpeciality!=null' appearance="outline" style="width: 80%;">
         <mat-label>Search</mat-label>
-        <input matInput type="text" name="search" [(ngModel)]="searchText" 
+        <input matInput type="text" name="search" [(ngModel)]="searchText" (keyup)="SearchData()"
         autocomplete="off" placeholder="Search Doctor By : Hospital Name / Dr. Name  / Speciality / Address">
         <button mat-icon-button matSuffix>
             <mat-icon>search</mat-icon>
         </button>
     </mat-form-field>
+    <section *ngIf='SelectedSpeciality!=null'>
+        Sort By<br>
+        <mat-button-toggle-group [(ngModel)]="SortBy" (change)="ChangeSortingType()" name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="Distance">Distance</mat-button-toggle>
+            <mat-button-toggle value="Fee">Consultation Fee</mat-button-toggle>
+        </mat-button-toggle-group>
+    </section>
 </form>
-<mat-card *ngFor="let obj of AllDoctor | filter:searchText;">
+<div *ngIf='SelectedSpeciality!=null'>
+<mat-card *ngFor="let obj of obs | async;">
     <mat-card-header>
         <mat-card-title>{{obj.Hospital_Name}}</mat-card-title>
         <mat-card-subtitle>Dr. {{obj.Full_Name}}</mat-card-subtitle>
+        <span style="flex: 1 1 auto;">
+            <mat-chip-list style="float:right;">
+                <mat-chip color="accent" selected>
+                    Distance : {{obj.Distance}} K.M.
+                </mat-chip>
+            </mat-chip-list>
+        </span>
     </mat-card-header>
     <mat-divider></mat-divider>    
-    <mat-card-content>
+    <mat-card-content> 
         <table>
             <tr>
                 <td>Speciality</td><td>:</td>
@@ -46,3 +71,5 @@
         <button mat-raised-button class="Btn"  color="primary" (click)="SetAppointment(obj)">Set Appointment</button>
     </mat-card-actions>
 </mat-card>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

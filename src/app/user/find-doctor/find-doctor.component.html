@@ -17,7 +17,7 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <section>
+    <section *ngIf="searchText!='' || SelectedSpeciality!=''">
         Sort By<br>
         <mat-button-toggle-group [(ngModel)]="SortBy" (change)="ChangeSortingType()" name="fontStyle" aria-label="Font Style">
             <mat-button-toggle value="Distance">Distance</mat-button-toggle>
@@ -25,7 +25,7 @@
         </mat-button-toggle-group>
     </section>
 </form>
-<div *ngIf='SelectedSpeciality!=null'>
+<div *ngIf="searchText!='' || SelectedSpeciality!=''">
 <mat-card *ngFor="let obj of obs | async;">
     <mat-card-header>
         <mat-card-title>{{obj.Hospital_Name}}</mat-card-title>
@@ -71,5 +71,5 @@
         <button mat-raised-button class="Btn"  color="primary" (click)="SetAppointment(obj)">Set Appointment</button>
     </mat-card-actions>
 </mat-card>
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+<mat-paginator style="width: 85%;margin: auto;" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>

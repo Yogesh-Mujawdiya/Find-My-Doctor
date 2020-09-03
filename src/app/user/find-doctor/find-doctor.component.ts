@@ -20,7 +20,7 @@ export class FindDoctorComponent implements OnInit {
   Doctors:DoctorModule[];
   Distance : any[];
   searchText:string = '';
-  SelectedSpeciality:string;
+  SelectedSpeciality:string = '';
   Speciality = ['All',
     'Physician','Physician (Ayurvedic)','Physician (Homeopathy)',
     'Cardiologist','Neurologist','Gastroenterologist','Orthopedic',

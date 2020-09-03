@@ -11,13 +11,11 @@ import { AccountService } from '../service/account.service';
 })
 export class AdminComponent implements OnInit {
 
-  TagName : string = "Doctors";
+  TagName : string = "Home";
   doctor:DoctorModule;
   constructor(private router : Router,
     private adminService:AdminService,
     private accountService:AccountService) { 
-      
-      this.router.navigateByUrl('admin/DoctorRegistrationRequest');
       setInterval(() => {
         if(this.accountService.getUserType()!='Admin')
           this.router.navigateByUrl('');

@@ -2,14 +2,6 @@
 
 <form style="text-align: center;">
     <mat-form-field appearance="outline" style="width: 80%;">
-        <mat-label>Choose Doctor Specialization</mat-label>
-        <mat-select name='SelectedSpeciality' [(ngModel)]="SelectedSpeciality" (selectionChange)="ChangeSpeciality()">
-            <mat-option *ngFor="let S of Speciality" [value]="S">
-            {{S}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field *ngIf='SelectedSpeciality!=null' appearance="outline" style="width: 80%;">
         <mat-label>Search</mat-label>
         <input matInput type="text" name="search" [(ngModel)]="searchText" (keyup)="SearchData()"
         autocomplete="off" placeholder="Search Doctor By : Hospital Name / Dr. Name  / Speciality / Address">
@@ -17,7 +9,15 @@
             <mat-icon>search</mat-icon>
         </button>
     </mat-form-field>
-    <section *ngIf='SelectedSpeciality!=null'>
+    <mat-form-field appearance="outline" style="width: 80%;">
+        <mat-label>Choose Doctor Specialization</mat-label>
+        <mat-select name='SelectedSpeciality' [(ngModel)]="SelectedSpeciality" (selectionChange)="ChangeSpeciality()">
+            <mat-option *ngFor="let S of Speciality" [value]="S">
+            {{S}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <section>
         Sort By<br>
         <mat-button-toggle-group [(ngModel)]="SortBy" (change)="ChangeSortingType()" name="fontStyle" aria-label="Font Style">
             <mat-button-toggle value="Distance">Distance</mat-button-toggle>

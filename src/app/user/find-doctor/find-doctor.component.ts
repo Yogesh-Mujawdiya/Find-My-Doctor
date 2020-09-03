@@ -19,9 +19,9 @@ export class FindDoctorComponent implements OnInit {
   AllDoctor:DoctorModule[]; 
   Doctors:DoctorModule[];
   Distance : any[];
-  searchText:string;
+  searchText:string = '';
   SelectedSpeciality:string;
-  Speciality = [
+  Speciality = ['All',
     'Physician','Physician (Ayurvedic)','Physician (Homeopathy)',
     'Cardiologist','Neurologist','Gastroenterologist','Orthopedic',
     'Dermatologist','Gynaecologist','Psychologist','Oncologist','Others'
@@ -71,34 +71,35 @@ export class FindDoctorComponent implements OnInit {
 
   ChangeSpeciality(){
     this.Doctors=<DoctorModule[]> [];
-    for(let obj of this.AllDoctor){
-      if(obj.Speciality == this.SelectedSpeciality){
-        this.Doctors.push(obj);
-      }
+    if(this.SelectedSpeciality=="All"){
+      this.Doctors = <DoctorModule[]>this.AllDoctor;
+    }else{
+      for(let obj of this.AllDoctor)
+        if(obj.Speciality == this.SelectedSpeciality)
+          this.Doctors.push(obj);
     }
     this.Doctors.sort((a:DoctorModule, b:DoctorModule) => (a.Distance - b.Distance));
     this.updateData(this.Doctors);
   }
 
   isAvailable(D:DoctorModule):boolean{
-    if(D.Address.search(this.searchText)!=-1){
+    if(D.Address.toLowerCase().search(this.searchText.toLowerCase())!=-1){
       return true;
-    }else if(D.Hospital_Name.search(this.searchText)!=-1){
+    }else if(D.Hospital_Name.toLowerCase().search(this.searchText.toLowerCase())!=-1){
       return true;
-    }else if(D.Speciality.search(this.searchText)!=-1){
+    }else if(D.Speciality.toLowerCase().search(this.searchText.toLowerCase())!=-1){
       return true;
-    }else if(D.Full_Name.search(this.searchText)!=-1){
+    }else if(D.Full_Name.toLowerCase().search(this.searchText.toLowerCase())!=-1){
       return true;
     }
     return false;
   }
   SearchData(){
-    let Data:DoctorModule[] = []
-    for(let obj of this.Doctors){
-      if(this.isAvailable(obj)){
+    this.SelectedSpeciality = "All";
+    let Data:DoctorModule[] = [];
+    for(let obj of this.Doctors)
+      if(this.isAvailable(obj))
         Data.push(obj);
-      }
-    }
     this.updateData(Data);
   }
   updateData(data:DoctorModule[]){

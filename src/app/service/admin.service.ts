@@ -12,6 +12,8 @@ export class AdminService {
   DoctorRegistrationRequestUrl : string = "/Doctor.php";
   setDoctorStatusUrl : string = "/SetDoctorStatus.php";
   addNotificationUrl : string = "/AddNotification.php";
+  AddDoctorUrl : string = "/AddDoctor.php";
+  DeleteDoctorUrl : string = "/DeleteDoctor.php";
   
   constructor(private http : HttpClient) {
    
@@ -33,5 +35,30 @@ export class AdminService {
     body.append('UserType', UserType);
     body.append('Text', Text);
     return this.http.post<any>(this.HostUrl+this.addNotificationUrl,body).pipe();
+  }
+
+  
+  AddDoctor(Mobile,Name,address,latitude,longitude,speciality,hospital_Name,
+    consultation_Fee,opning_Time,closing_Time):any{
+      let body = new FormData();
+      body.append('MobileNo', Mobile);
+      body.append('FullName', Name);
+      body.append('Address', address);
+      body.append('Latitude', latitude);
+      body.append('Longitude', longitude);
+      body.append('Speciality', speciality);
+      body.append('Hospital_Name', hospital_Name);
+      body.append('Consultation_Fee', consultation_Fee);
+      body.append('Opning_Time', opning_Time);
+      body.append('Closing_Time', closing_Time);
+    return this.http.post<any>(this.HostUrl+this.AddDoctorUrl,body)
+      .pipe();  
+  }
+  
+  DeleteDoctor(Mobile):any{
+      let body = new FormData();
+      body.append('MobileNo', Mobile);
+    return this.http.post<any>(this.HostUrl+this.DeleteDoctorUrl,body)
+      .pipe();  
   }
 }

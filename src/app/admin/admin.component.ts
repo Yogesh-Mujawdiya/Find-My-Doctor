@@ -11,11 +11,13 @@ import { AccountService } from '../service/account.service';
 })
 export class AdminComponent implements OnInit {
 
-  TagName : string = "Home";
+  TagName : string = "Doctors";
   doctor:DoctorModule;
   constructor(private router : Router,
     private adminService:AdminService,
     private accountService:AccountService) { 
+      
+      this.router.navigateByUrl('admin/DoctorRegistrationRequest');
       setInterval(() => {
         if(this.accountService.getUserType()!='Admin')
           this.router.navigateByUrl('');
@@ -29,7 +31,7 @@ export class AdminComponent implements OnInit {
   changeValue(){
     if(this.TagName=='Home'){
       this.GoTo('/admin')
-    }else if(this.TagName=='DoctorRequest'){
+    }else if(this.TagName=='Doctors'){
       this.GoTo('/admin/DoctorRegistrationRequest');
     }else if(this.TagName=='Notification') {
       this.GoTo('/admin/Notification');

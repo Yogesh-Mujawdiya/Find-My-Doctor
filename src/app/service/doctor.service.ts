@@ -34,4 +34,5 @@ export class DoctorService {
     body.append('Status', Status);
     return this.http.post<any>(this.HostUrl+this.ResponseAppointmentUrl,body).pipe();
   }
+
 }

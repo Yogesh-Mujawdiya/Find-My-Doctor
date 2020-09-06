@@ -17,8 +17,9 @@ fieldset{
     width: 73%;
     margin: auto;
 }
-.Btn{
-    margin: 25px;
+button{
+    margin-left: 20px;
+    margin-right: 20px;
     min-width: 125px;
 }
 .header-image {

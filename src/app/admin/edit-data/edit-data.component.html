@@ -61,9 +61,9 @@
             </mat-card-content>    
             <mat-card-actions align='end'>
                 <button mat-raised-button class="Btn" *ngIf="Request=='Approved'" color="primary" (click)="EditDoctor(obj)">Edit</button>
-                <button mat-raised-button class="Btn"  color="warn" (click)="DeleteDoctor(obj)">Delete</button>
                 <button mat-raised-button class="Btn" *ngIf="Request!='Not Approved'" color="accent" (click)="ResponseRegistrationRequest(obj,'Not Approved')">Cancel</button>
                 <button mat-raised-button class="Btn" *ngIf="Request!='Approved'" color="primary" (click)="ResponseRegistrationRequest(obj,'Approved')">Accept</button>
+                <button mat-raised-button class="Btn"  color="warn" (click)="DeleteDoctor(obj)">Delete</button>
             </mat-card-actions>
         </mat-card>
         <mat-paginator style="width: 80%; margin: auto;" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

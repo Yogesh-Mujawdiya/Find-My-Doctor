@@ -55,7 +55,6 @@ export class AddDataComponent implements OnInit {
       console.log(data);
       let AllSpeciality = <SpecialityModule[]>data.SpecialityList;     
       this.options = [];
-      this.options.push("All");
       for(let o of AllSpeciality)
         this.options.push(o.Name);
       

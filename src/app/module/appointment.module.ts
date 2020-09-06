@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class AppointmentModule { 
+  Id:number;
   User_Mobile_No:string;
   Dr_Mobile_No:string;
   Date_Time:string;

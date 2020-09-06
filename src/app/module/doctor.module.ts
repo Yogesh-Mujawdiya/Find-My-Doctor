@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class DoctorModule { 
+  Id:number;
   Mobile_No:string;
   Full_Name:string;
   Address:string;
@@ -21,4 +22,5 @@ export class DoctorModule {
   Longitude :number;
   Status:string;
   Distance:number;
+
 }

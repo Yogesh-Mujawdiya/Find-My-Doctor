@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { AccountService } from 'src/app/service/account.service';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/service/common.service';
+import { SpecialityModule } from 'src/app/module/speciality.module';
 
 @Component({
   selector: 'app-find-doctor',
@@ -21,11 +23,7 @@ export class FindDoctorComponent implements OnInit {
   Distance : any[];
   searchText:string = '';
   SelectedSpeciality:string = '';
-  Speciality = ['All',
-    'Physician','Physician (Ayurvedic)','Physician (Homeopathy)',
-    'Cardiologist','Neurologist','Gastroenterologist','Orthopedic',
-    'Dermatologist','Gynaecologist','Psychologist','Oncologist','Others'
-  ];
+  Speciality = [ ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
@@ -38,9 +36,24 @@ export class FindDoctorComponent implements OnInit {
     public dialog: MatDialog,
     private accountService : AccountService,
     private changeDetectorRef: ChangeDetectorRef,
+    private commonService:CommonService,
     private router: Router) {
+      this.GetSpeciality();
   }
 
+  
+
+  GetSpeciality(){
+    this.commonService.getDoctorSpeciality().subscribe(data=>{
+      console.log(data);
+      let AllSpeciality = <SpecialityModule[]>data.SpecialityList;     
+      this.Speciality = [];
+      this.Speciality.push("All");
+      for(let o of AllSpeciality)
+        this.Speciality.push(o.Name);
+    });
+    
+  }
   ngOnInit(): void { 
     this.userService.getAllDoctor().subscribe(data =>{
       this.AllDoctor = <DoctorModule[]>data.DoctorList;
@@ -122,7 +135,7 @@ export class FindDoctorComponent implements OnInit {
     if(this.accountService.isLogin())
       this.openDialog(doctor);
     else
-      window.open("http://localhost:4200/Account/Login", "_blank");
+      window.open("https://find--my--doctor.herokuapp.com/Account/Login", "_blank");
       // this.router.navigateByUrl('Account/Login');
   }
 

@@ -5,8 +5,10 @@ import { Observable, from } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { AccountService } from '../../service/account.service';
 import { DatePipe } from '@angular/common';
-import { _SnackBarContainer, MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/service/common.service';
+import { SpecialityModule } from 'src/app/module/speciality.module';
 
 @Component({
   selector: 'app-sign-up',
@@ -30,11 +32,7 @@ export class SignUpComponent implements OnInit {
   Close_Time : string = '';
   IsProgressing:boolean;
   myControl = new FormControl();
-  options: string[] = [
-    'Physician','Physician (Ayurvedic)','Physician (Homeopathy)',
-    'Cardiologist','Neurologist','Gastroenterologist','Orthopedic',
-    'Dermatologist','Gynaecologist','Psychologist','Oncologist','Others'
-  ];
+  options: string[] ;
   filteredOptions: Observable<string[]>;
 
   
@@ -42,16 +40,30 @@ export class SignUpComponent implements OnInit {
     private accountService : AccountService,
     private datePipe:DatePipe,
     private snackBar: MatSnackBar,
+    private commonService : CommonService,
     private router: Router) { 
       if(accountService.isLogin())
         this.GoTo('');
+      this.GetSpeciality();
     }
 
-  ngOnInit(): void {
+    
+  GetSpeciality(){
+    this.commonService.getDoctorSpeciality().subscribe(data=>{
+      console.log(data);
+      let AllSpeciality = <SpecialityModule[]>data.SpecialityList;     
+      this.options = [];
+      this.options.push("All");
+      for(let o of AllSpeciality)
+        this.options.push(o.Name);
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
+    });
+  }
+
+  ngOnInit(): void {
   }
 
   

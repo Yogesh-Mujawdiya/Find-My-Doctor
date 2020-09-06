@@ -1,17 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
     CommonModule
   ]
 })
-export class NotificationModule { 
+export class SpecialityModule { 
   Id:number;
-  UserType:string;
-  Text:string;
-  Time:Date;
+  Name:string;
 }

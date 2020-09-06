@@ -52,8 +52,8 @@ import { SignUpComponent } from './account/sign-up/sign-up.component';
 import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './user/user.component';
 import { DoctorComponent } from './doctor/doctor.component';
-import { DoctorRegistrationApprovelComponent } from './admin/doctor-registration-approvel/doctor-registration-approvel.component';
-import { NotificationsHandlingComponent } from './admin/notifications-handling/notifications-handling.component';
+import { EditDataComponent } from './admin/edit-data/edit-data.component';
+import { AddDataComponent } from './admin/add-data/add-data.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AccountComponent } from './account/account.component';
 import { ProfileComponent } from './account/profile/profile.component';
@@ -74,6 +74,7 @@ import { DialogAppointmentComponent } from './user/DialogAppointment/dialog-appo
 
 import { AppointmentListComponent } from './doctor/appointment-list/appointment-list.component';
 import { AppointmentRequestComponent } from './doctor/appointment-request/appointment-request.component';
+import { DialogEditDoctorComponent } from './admin/dialog-edit-doctor/dialog-edit-doctor.component';
 
 @NgModule({
   declarations: [
@@ -83,8 +84,8 @@ import { AppointmentRequestComponent } from './doctor/appointment-request/appoin
     AdminComponent,
     UserComponent,
     DoctorComponent,
-    DoctorRegistrationApprovelComponent,
-    NotificationsHandlingComponent,
+    EditDataComponent,
+    AddDataComponent,
     AdminHomeComponent,
     AccountComponent,
     ProfileComponent,
@@ -98,7 +99,8 @@ import { AppointmentRequestComponent } from './doctor/appointment-request/appoin
     PageNotFoundComponent,
     HomeComponent,
     LogOutComponent,
-    DialogAppointmentComponent
+    DialogAppointmentComponent,
+    DialogEditDoctorComponent
   ],
   imports: [
     Ng2SearchPipeModule,

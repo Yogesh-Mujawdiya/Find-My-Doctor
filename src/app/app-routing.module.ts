@@ -2,13 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin.component'
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component'
-import { DoctorRegistrationApprovelComponent } from './admin/doctor-registration-approvel/doctor-registration-approvel.component'
+import { EditDataComponent } from './admin/edit-data/edit-data.component';
 import { AccountComponent } from './account/account.component';
 import { AccountHomeComponent } from './account/account-home/account-home.component';
 import { LoginComponent } from './account/login/login.component';
 import { SignUpComponent } from './account/sign-up/sign-up.component';
 import { ProfileComponent } from './account/profile/profile.component';
-import { NotificationsHandlingComponent } from './admin/notifications-handling/notifications-handling.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { DoctorHomeComponent } from './doctor/doctor-home/doctor-home.component';
 import { AppointmentListComponent } from './doctor/appointment-list/appointment-list.component';
@@ -18,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { FindDoctorComponent } from './user/find-doctor/find-doctor.component';
 import { MyAppointmentComponent } from './user/my-appointment/my-appointment.component';
+import { AddDataComponent } from './admin/add-data/add-data.component';
 
 const routes: Routes = [
   { path: '', component:HomeComponent},
@@ -48,12 +48,12 @@ const routes: Routes = [
         component: AdminHomeComponent
       },
       {
-        path: 'DoctorRegistrationRequest',
-        component: DoctorRegistrationApprovelComponent
+        path: 'EditData',
+        component: EditDataComponent
       },
       {
-        path: 'Notification',
-        component: NotificationsHandlingComponent
+        path: 'AddData',
+        component: AddDataComponent
       }
     ]
   },

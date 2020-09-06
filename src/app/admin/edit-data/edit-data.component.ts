@@ -9,38 +9,27 @@ import { startWith, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogEditDoctorComponent } from '../dialog-edit-doctor/dialog-edit-doctor.component';
+import { MatDialog } from '@angular/material/dialog';
+import { NotificationModule } from 'src/app/module/notification.module';
+import { SpecialityModule } from 'src/app/module/speciality.module';
 
 @Component({
-  selector: 'app-doctor-registration-approvel',
-  templateUrl: './doctor-registration-approvel.component.html',
-  styleUrls: ['./doctor-registration-approvel.component.css']
+  selector: 'app-edit-data',
+  templateUrl: './edit-data.component.html',
+  styleUrls: ['./edit-data.component.css']
 })
-export class DoctorRegistrationApprovelComponent implements OnInit {
+export class EditDataComponent implements OnInit {
     
-  Address : string = '';
-  Mobile_No : string = '';
-  Name : string = '';
-  Speciality : string = '';
-  Hospital_Name : string = '';
-  Consultation_Fee : string = '';
-  Open_Time : string = '';
-  Close_Time : string = '';
   IsProgressing:boolean;
   myControl = new FormControl();
-  options: string[] = [
-    'Physician','Physician (Ayurvedic)','Physician (Homeopathy)',
-    'Cardiologist','Neurologist','Gastroenterologist','Orthopedic',
-    'Dermatologist','Gynaecologist','Psychologist','Oncologist','Others'
-  ];
-  Specialitys: string[] = ['All',
-    'Physician','Physician (Ayurvedic)','Physician (Homeopathy)',
-    'Cardiologist','Neurologist','Gastroenterologist','Orthopedic',
-    'Dermatologist','Gynaecologist','Psychologist','Oncologist','Others'
-  ];
+  Specialitys: string[] = [];
   filteredOptions: Observable<string[]>;
 
   
   AllDoctors:DoctorModule[];
+  AllNotification:NotificationModule[];
+  AllSpeciality:SpecialityModule[];
   ApprovedDoctor:DoctorModule[];
   NotApprovedDoctor:DoctorModule[];
   PendingDoctor:DoctorModule[];
@@ -60,29 +49,40 @@ export class DoctorRegistrationApprovelComponent implements OnInit {
     private adminService:AdminService,
     private changeDetectorRef: ChangeDetectorRef,
     private router: Router,
+    public dialog: MatDialog,
     private snackBar: MatSnackBar) {
     this.GetData();
+    this.GetNotification();
+    this.GetSpeciality();
   }
 
   ngOnInit(): void {
     
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
-  }
-
-  
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  GetNotification(){
+    this.adminService.getNotification().subscribe(data=>{
+      console.log(data);
+      this.AllNotification = <NotificationModule[]>data.NotificationList;     
+    });
+  }
+
+  GetSpeciality(){
+    this.adminService.getSpeciality().subscribe(data=>{
+      console.log(data);
+      this.AllSpeciality = <SpecialityModule[]>data.SpecialityList;     
+      this.Specialitys = [];
+      this.Specialitys.push("All");
+      for(let o of this.AllSpeciality)
+        this.Specialitys.push(o.Name);
+    });
+    
   }
 
   GetData(){
@@ -94,20 +94,6 @@ export class DoctorRegistrationApprovelComponent implements OnInit {
       this.AllDoctors = <DoctorModule[]>data.DoctorList;
       this.ChangeRequest();
     });
-  }
-
-  
-
-  GetAddress(){
-    this.locationService.getCurrentLocation().then(pos=>
-      {
-         this.locationService.getAddress(pos.lng,pos.lat).subscribe(
-           data=>{
-             console.log(data);
-             this.Address = data.address.LongLabel;
-           }
-         )
-      });
   }
 
 
@@ -169,44 +155,45 @@ export class DoctorRegistrationApprovelComponent implements OnInit {
       });
   }
 
+  
+
+  EditDoctor(doctor:DoctorModule):void{
+    const dialogRef = this.dialog.open(DialogEditDoctorComponent, {
+      data: doctor
+    });
+  }
   DeleteDoctor(obj:DoctorModule){
     if(confirm("Are you sure to delete Dr. "+obj.Full_Name)) {
       this.adminService.DeleteDoctor(obj.Mobile_No).subscribe(
         data=>{
-          this.openSnackBar(data.message,data.ststus)
+          this.openSnackBar(data.message,data.status)
           this.GetData();
         }
       );
     }
   }
   
-  AddDoctor(){
-    if(this.Mobile_No=='' || this.Name=='' || this.Address=='' || this.Speciality=='' ||
-    this.Hospital_Name=='' || this.Consultation_Fee=='' || this.Open_Time=='' || this.Close_Time=='')
-      return;
-    if(this.options.indexOf(this.Speciality)==-1){
-      this.openSnackBar("If Dr. Speciality is not Available Select Others","Error")
-      return;
-    }
-    this.IsProgressing=true;
-    this.locationService.getCordinate(this.Address).subscribe(
-      data =>{
-        let C = data.candidates[0].location;
-        this.AddData(C.x,C.y);
-      }
-    );
-  }
-
-  AddData(latitude,longitude){
-    this.adminService.AddDoctor(this.Mobile_No,this.Name,this.Address,latitude,longitude,this.Speciality,this.Hospital_Name,
-      this.Consultation_Fee,this.Open_Time,this.Close_Time).subscribe(
+  DeleteNotification(obj:NotificationModule){
+    if(confirm("Are you sure to delete !!")) {
+      this.adminService.deleteNotification(obj.Id).subscribe(
         data=>{
-          this.IsProgressing=false;
-          this.openSnackBar(data.message,data.status);
-        });
+          this.openSnackBar(data.message,data.status)
+          this.GetNotification();
+        }
+      );
+    }
   }
-
-
+  
+  DeleteSpeciality(obj:SpecialityModule){
+    if(confirm("Are you sure to delete "+obj.Name)) {
+      this.adminService.deleteSpeciality(obj.Id).subscribe(
+        data=>{
+          this.openSnackBar(data.message,data.status)
+          this.GetSpeciality();
+        }
+      );
+    }
+  }
 
   GoTo(Url:string){
     this.router.navigateByUrl(Url);

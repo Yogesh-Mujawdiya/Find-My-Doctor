@@ -11,7 +11,7 @@ export class CommonService {
   GetAllNotificationUrl : string = "/GetAllNotification.php";
   GetDoctorNotificationUrl : string = "/GetDoctorNotification.php";
   GetUserNotificationUrl : string = "/GetUserNotification.php";
-  
+  DoctorSpecialityUrl : string = "/Speciality.php"
   constructor(private http : HttpClient) { }
 
   getAllNotification(){
@@ -22,6 +22,9 @@ export class CommonService {
   }
   getUserNotification(){
     return this.http.get<any>(this.HostUrl+this.GetUserNotificationUrl).pipe();
+  }
+  getDoctorSpeciality(){
+    return this.http.get<any>(this.HostUrl+this.DoctorSpecialityUrl).pipe();
   }
 
 }

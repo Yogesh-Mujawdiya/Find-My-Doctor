@@ -29,10 +29,10 @@ export class AdminComponent implements OnInit {
   changeValue(){
     if(this.TagName=='Home'){
       this.GoTo('/admin')
-    }else if(this.TagName=='Doctors'){
-      this.GoTo('/admin/DoctorRegistrationRequest');
-    }else if(this.TagName=='Notification') {
-      this.GoTo('/admin/Notification');
+    }else if(this.TagName=='Edit'){
+      this.GoTo('/admin/EditData');
+    }else if(this.TagName=='Add') {
+      this.GoTo('/admin/AddData');
     }
   }
   

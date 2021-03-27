@@ -1,0 +1,23 @@
+mat-card{
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 700px;
+    width: 80%;
+}
+
+
+section{
+    margin: auto;
+    text-align: center;
+}
+mat-button-toggle-group{
+    margin: 10px;
+}
+.mat-button-toggle-checked{
+  background-color: #9d00a2;
+  color: white;
+}
+mat-button-toggle{
+    width: 200px;
+}

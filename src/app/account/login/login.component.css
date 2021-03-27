@@ -1,0 +1,40 @@
+mat-card{
+    margin: 20px;
+    max-width: 500px;
+    margin: auto;
+}
+
+mat-card-content{
+    text-align: center;
+    margin: 10px;
+}
+mat-form-field{
+    width: 75%;
+}
+.Btn{
+    margin: 25px;
+    min-width: 200px;
+}
+.header-image {
+    background-image: url('../../../assets/img/login.png');
+    background-size: cover;
+  }
+
+  mat-card-actions{
+      text-align: center;
+  }
+
+  .progress{
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 0.5;
+      background-color: #000;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+  }
+  mat-spinner{
+      margin: auto;
+      top: 40%;
+  }

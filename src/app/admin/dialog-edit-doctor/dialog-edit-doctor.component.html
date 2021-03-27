@@ -1,0 +1,58 @@
+<h1 mat-dialog-title>Edit Doctor</h1>
+<form style="text-align: center;">
+  <div mat-dialog-content>
+      <mat-form-field style="width: 80%;" appearance="outline">
+          <mat-label>Full Name</mat-label>
+          <input matInput type="text" name="name" [(ngModel)]="Doctor.Full_Name" required>
+      </mat-form-field>
+      <mat-form-field style="width: 38%; margin-left: 2%; margin-right: 2%;" appearance="outline">
+          <mat-label>Mobile No.</mat-label>
+          <input matInput type="text" name="Mobile_No" [(ngModel)]="Doctor.Mobile_No" required>
+      </mat-form-field>
+      <mat-form-field style="width: 38%; margin-left: 2%; margin-right: 2%;" appearance="outline">
+          <mat-label>Hospital/Clinic Name</mat-label>
+          <input matInput  name="Hospital_Name" [(ngModel)]="Doctor.Hospital_Name" type="text" required>
+      </mat-form-field>
+      <mat-form-field style="width: 38%; margin-left: 2%; margin-right: 2%;" appearance="outline">
+          <mat-label>Speciality</mat-label>
+          <input type="text"
+          placeholder="Select Speciality"
+          matInput
+          name="Speciality" [(ngModel)]='Doctor.Speciality'
+          [formControl]="myControl"
+          [matAutocomplete]="auto" required>
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+              </mat-option>
+          </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field style="width: 38%; margin-left: 2%; margin-right: 2%;" appearance="outline">
+          <mat-label>Consultation Fee</mat-label>
+          <input matInput type="number" name="Consultation_Fee" [(ngModel)]="Doctor.Consultation_Fee" name="Consultation_Fee" required />
+          <button disabled type="button" style="margin: -10px;" mat-icon-button matSuffix>
+              <span style="font-size: large; margin-top: -15px;">&#8377;</span>
+          </button>
+      </mat-form-field>
+      <mat-form-field style="width: 80%;" appearance="outline">
+          <mat-label>Address</mat-label>
+          <textarea matInput type="text" name="Address" required [(ngModel)]='Doctor.Address'></textarea>
+          <button  type="button" mat-icon-button matSuffix (click)="GetAddress()">
+              <mat-icon>location_on</mat-icon>
+          </button>
+      </mat-form-field>
+      <div style="text-align: left; width: 75%; margin: auto;margin-bottom: 5px;padding-left: 10px;">Visit Time</div>
+      <mat-form-field  style="width: 38%; margin-left: 2%; margin-right: 2%;" appearance="outline">
+          <mat-label>Opning Time</mat-label>
+          <input matInput type="time" name="Open_Time" [(ngModel)]="Doctor.Opning_Time" name="Visit_Time" required />
+      </mat-form-field>
+      <mat-form-field  style="width: 38%; margin-left: 2%; margin-right: 2%;" appearance="outline">
+          <mat-label>Closing Time</mat-label>
+          <input matInput type="time" name="CTime" [(ngModel)]="Doctor.Closing_Time" name="Visit_Time" required />
+      </mat-form-field>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button class="Btn" type="button" (click)="onNoClick()" color="accent">No Thanks</button>
+    <button mat-raised-button class="Btn" type="submit" (click)="EditDoctor()" cdkFocusInitial color="primary">Save Data</button>
+  </div>
+</form>

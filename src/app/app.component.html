@@ -1,0 +1,40 @@
+<header>
+    <mat-toolbar color="primary">
+        <span>Find My Doctor</span>
+        <span class="example-spacer"></span>
+        <button mat-raised-button *ngIf="!isUserLogin" (click)="GoTo('/Account/Login')" class="Menu-Btn" aria-label="Login">
+            Login
+        </button>
+        <button mat-raised-button *ngIf="!isUserLogin" (click)="GoTo('/Account/SignUp')" class="Menu-Btn" aria-label="Login">
+            Signup
+        </button>
+        <button mat-icon-button *ngIf="isUserLogin" [matMenuTriggerFor]="menu">
+            <mat-icon>notifications</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <div *ngFor="let obj of Notification;" mat-menu-item style="background-color: #e6e6e6; margin-bottom: 2px;min-width: 200px;">
+                {{obj.Text}}
+            </div>
+          </mat-menu>
+        <button mat-icon-button *ngIf="isUserLogin" (click)="GoTo('/Account/Profile')" class="Menu-Btn" aria-label="Login">
+            <mat-icon>person</mat-icon>
+        </button>
+        <button mat-raised-button *ngIf="isUserLogin" (click)="Logout()" class="Menu-Btn" aria-label="Login">
+            Logout
+        </button>
+    </mat-toolbar>
+</header>
+<mat-divider style="margin-top: 60px; margin-bottom: 25px;"></mat-divider>
+<div *ngIf="isUser">
+    <section>
+        <mat-button-toggle-group [(ngModel)]="TagName" name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle (click)="GoTo('/user/Appointment')" value="MyAppointment">My Appointment</mat-button-toggle>
+            <mat-button-toggle (click)="GoTo('')" value="SearchDoctor">Find Doctor</mat-button-toggle>
+        </mat-button-toggle-group>
+    </section>
+    <mat-divider></mat-divider>
+</div>
+<router-outlet></router-outlet>
+
+<mat-divider style="margin-top: 20px; margin-bottom: 10px;"></mat-divider>
+<app-footer></app-footer>

@@ -1,0 +1,61 @@
+mat-card{
+    margin: 20px;
+    max-width: 500px;
+    margin: auto;
+}
+
+mat-card-content{
+    margin: 10px;
+    text-align: center;
+}
+mat-form-field{
+    width: 75%;
+}
+fieldset{
+    width: 73%;
+    margin: auto;
+}
+.Btn{
+    margin: 25px;
+    min-width: 200px;
+}
+.header-image {
+    background-image: url('../../../assets/img/login.png');
+    background-size: cover;
+  }
+
+
+  mat-card-actions{
+      text-align: center;
+  }
+
+  mat-button-toggle-group{
+      margin: 10px;
+  }
+  .mat-button-toggle-checked{
+    background-color: #2979FF;
+    color: white;
+  }
+  mat-button-toggle{
+      width: 100px;
+  }
+
+  mat-radio-button{
+      margin-left: 20px;
+  }
+  
+
+  .progress{
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+}
+mat-spinner{
+    margin: auto;
+    top: 40%;
+}

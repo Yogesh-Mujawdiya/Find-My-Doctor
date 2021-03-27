@@ -1,0 +1,75 @@
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Pending"> 
+        <mat-card *ngFor="let obj of PendingAppointment;">
+            <mat-card-header>
+                <mat-card-title>{{obj.User.Full_Name}}</mat-card-title>
+                <mat-card-subtitle>{{obj.User.Mobile_No}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>    
+            <mat-card-content>
+                <table>
+                    <tr>
+                        <td>Time</td><td>:</td>
+                        <td>{{obj.Appointment.Date_Time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td><td>:</td>
+                        <td>{{obj.Appointment.Status}}</td>
+                    </tr>
+                </table>
+            </mat-card-content>
+            <mat-card-actions align='end'>
+                <button mat-raised-button class="Btn"  color="warn" (click)="ResponseAppointment(obj,'Not Approved')">Not Accept</button>
+                <button mat-raised-button class="Btn"  color="primary" (click)="ResponseAppointment(obj,'Approved')">Accept</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Approved">
+        <mat-card *ngFor="let obj of ApprovedAppointment;">
+            <mat-card-header>
+                <mat-card-title>{{obj.User.Full_Name}}</mat-card-title>
+                <mat-card-subtitle>{{obj.User.Mobile_No}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>    
+            <mat-card-content>
+                <table>
+                    <tr>
+                        <td>Time</td><td>:</td>
+                        <td>{{obj.Appointment.Date_Time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td><td>:</td>
+                        <td>{{obj.Appointment.Status}}</td>
+                    </tr>
+                </table>
+            </mat-card-content>
+            <mat-card-actions align='end'>
+                <button mat-raised-button class="Btn"  color="warn" (click)="ResponseAppointment(obj,'Not Approved')">Cancle</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Not Approved">
+        <mat-card *ngFor="let obj of NotApprovedAppointment;">
+            <mat-card-header>
+                <mat-card-title>{{obj.User.Full_Name}}</mat-card-title>
+                <mat-card-subtitle>{{obj.User.Mobile_No}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>    
+            <mat-card-content>
+                <table>
+                    <tr>
+                        <td>Time</td><td>:</td>
+                        <td>{{obj.Appointment.Date_Time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td><td>:</td>
+                        <td>{{obj.Appointment.Status}}</td>
+                    </tr>
+                </table>
+            </mat-card-content>
+            <mat-card-actions align='end'>
+                <button mat-raised-button class="Btn"  color="primary" (click)="ResponseAppointment(obj,'Approved')">Accept</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+  </mat-tab-group>

@@ -1,0 +1,88 @@
+<mat-tab-group mat-align-tabs="center">  
+    <mat-tab label="Notification">
+        <mat-card>
+            <form style="text-align: center;">
+                <mat-form-field appearance="outline">
+                    <mat-label>Notify To</mat-label>
+                    <mat-select name="UserType" [(ngModel)]="UserType" required>
+                        <mat-option value="User">User</mat-option>
+                        <mat-option value="Doctor">Doctor</mat-option>
+                        <mat-option value="Both">Both</mat-option>
+                    </mat-select>
+                </mat-form-field><br>
+                <mat-form-field appearance="outline">
+                    <mat-label>Notification Text</mat-label>
+                    <textarea matInput name="NotificationText" [(ngModel)]="NotificationText" required></textarea>
+                </mat-form-field><br>
+                <button mat-raised-button type="submit" (click)="AddNotification()" class="Btn" color="primary">Send Notification</button>
+            </form>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Doctor">
+        <mat-card>
+            <form style="text-align: center;">
+                <mat-form-field style="width: 80%;" appearance="outline">
+                    <mat-label>Full Name</mat-label>
+                    <input matInput type="text" name="name" [(ngModel)]="Name" required>
+                </mat-form-field>
+                <mat-form-field style="width: 38%; margin-left: 2%; margin-right: 2%;" appearance="outline">
+                    <mat-label>Mobile No.</mat-label>
+                    <input matInput type="text" name="Mobile_No" [(ngModel)]="Mobile_No" required>
+                </mat-form-field>
+                <mat-form-field style="width: 38%; margin-left: 2%; margin-right: 2%;" appearance="outline">
+                    <mat-label>Speciality</mat-label>
+                    <input type="text"
+                    placeholder="Select Speciality"
+                    matInput
+                    name="Speciality" [(ngModel)]='Speciality'
+                    [formControl]="myControl"
+                    [matAutocomplete]="auto" required>
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field style="width: 38%; margin-left: 2%; margin-right: 2%;" appearance="outline">
+                    <mat-label>Hospital/Clinic Name</mat-label>
+                    <input matInput  name="Hospital_Name" [(ngModel)]="Hospital_Name" type="text" required>
+                </mat-form-field>
+                <mat-form-field style="width: 38%; margin-left: 2%; margin-right: 2%;" appearance="outline">
+                    <mat-label>Consultation Fee</mat-label>
+                    <input matInput type="number" name="Consultation_Fee" [(ngModel)]="Consultation_Fee" name="Consultation_Fee" required />
+                    <button  type="button" style="margin: -10px;" mat-icon-button matSuffix>
+                        <span style="font-size: large; margin-top: -15px;">&#8377;</span>
+                    </button>
+                </mat-form-field>
+                <mat-form-field style="width: 80%;" appearance="outline">
+                    <mat-label>Address</mat-label>
+                    <textarea matInput type="text" name="Address" required [(ngModel)]='Address'></textarea>
+                    <button  type="button" mat-icon-button matSuffix >
+                        <mat-icon>location_on</mat-icon>
+                    </button>
+                </mat-form-field>
+                <div style="text-align: left; width: 75%; margin: auto;margin-bottom: 5px;padding-left: 10px;">Visit Time</div>
+                <mat-form-field  style="width: 38%; margin-left: 2%; margin-right: 2%;" appearance="outline">
+                    <mat-label>Opning Time</mat-label>
+                    <input matInput type="time" name="Open_Time" [(ngModel)]="Open_Time" name="Visit_Time" required />
+                </mat-form-field>
+                <mat-form-field style="width: 38%; margin-left: 2%; margin-right: 2%;" appearance="outline">
+                    <mat-label>Closing Time</mat-label>
+                    <input matInput type="time" name="CTime" [(ngModel)]="Close_Time" name="Visit_Time" required />
+                </mat-form-field><br>
+                <button mat-raised-button class="Btn" (click)="AddDoctor()" color="primary">Add</button>
+            </form>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Speciality">
+        <mat-card>
+            <form style="text-align: center;">
+                <mat-form-field appearance="outline">
+                    <mat-label>Speciality</mat-label>
+                    <input matInput name="Speciality" [(ngModel)]="SpecialityName" required/>
+                </mat-form-field><br>
+                <button mat-raised-button type="submit" (click)="AddSpeciality()" class="Btn" color="primary">Add Data</button>
+            </form>
+        </mat-card>
+    </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,10 @@
+<mat-divider></mat-divider>
+<section>
+    <mat-button-toggle-group [(ngModel)]="TagName" (change)="changeValue()"  name="TagName" aria-label="Font Style">
+        <mat-button-toggle value="Add">Add</mat-button-toggle>
+        <mat-button-toggle value="Home">Home</mat-button-toggle>
+        <mat-button-toggle value="Edit">Edit</mat-button-toggle>
+    </mat-button-toggle-group>
+</section>
+<mat-divider></mat-divider>
+<router-outlet></router-outlet>

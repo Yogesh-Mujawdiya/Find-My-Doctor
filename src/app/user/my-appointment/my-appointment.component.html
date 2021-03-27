@@ -1,0 +1,38 @@
+<mat-card *ngFor="let obj of MyAppointment;">
+    <mat-card-header>
+        <mat-card-title>{{obj.Doctor.Hospital_Name}}</mat-card-title>
+        <mat-card-subtitle>Dr. {{obj.Doctor.Full_Name}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>    
+    <mat-card-content>
+        <table>
+            <tr>
+                <td>Speciality</td><td>:</td>
+                <td>{{obj.Doctor.Speciality}}</td>
+            </tr>
+            <tr>
+                <td>At Time</td><td>:</td>
+                <td>{{obj.Appointment.Date_Time}}</td>
+            </tr>
+            <tr>
+                <td>Consultation Fee</td><td>:</td>
+                <td>{{obj.Doctor.Consultation_Fee}}</td>
+            </tr>
+            <tr>
+                <td>Contact No</td><td>:</td>
+                <td>{{obj.Doctor.Mobile_No}}</td>
+            </tr>
+            <tr>
+                <td>Address</td><td>:</td>
+                <td>{{obj.Doctor.Address}}</td>
+            </tr>
+            <tr>
+                <td>Status</td><td>:</td>
+                <td>{{obj.Appointment.Status}}</td>
+            </tr>
+        </table>
+    </mat-card-content>
+    <!-- <mat-card-actions align='end'>
+        <button mat-raised-button class="Btn"  color="primary" (click)="SetAppointment(obj)">Cansel Appointment</button>
+    </mat-card-actions> -->
+</mat-card>

@@ -1,0 +1,103 @@
+<mat-tab-group mat-align-tabs="center">  
+    <mat-tab label="Doctor">
+        <form style="text-align: center;">
+            <mat-form-field appearance="outline" style="width: 80%;">
+                <mat-label>Search</mat-label>
+                <input matInput type="text" name="search" [(ngModel)]="searchText" (keyup)="SearchData()"
+                autocomplete="off" placeholder="Search Doctor By : Hospital Name / Dr. Name  / Speciality / Address">
+                <button mat-icon-button matSuffix>
+                    <mat-icon>search</mat-icon>
+                </button>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 80%;">
+                <mat-label>Choose Doctor Specialization</mat-label>
+                <mat-select name='SelectedSpeciality' [(ngModel)]="SelectedSpeciality" (selectionChange)="ChangeSpeciality()">
+                    <mat-option *ngFor="let S of Specialitys" [value]="S">
+                    {{S}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <section>
+                <mat-button-toggle-group [(ngModel)]="Request" (change)="ChangeRequest()" name="fontStyle">
+                    <mat-button-toggle value="Pending">Pending Request</mat-button-toggle>
+                    <mat-button-toggle value="Approved">Approved</mat-button-toggle>
+                    <mat-button-toggle value="Not Approved">Not Approved</mat-button-toggle>
+                </mat-button-toggle-group>
+            </section>
+        </form>
+        <mat-card *ngFor="let obj of obs | async;">
+            <mat-card-header>
+                <mat-card-title>{{obj.Hospital_Name}}</mat-card-title>
+                <mat-card-subtitle>Dr. {{obj.Full_Name}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>    
+            <mat-card-content>
+                <table class="Table">
+                    <tr>
+                        <td>Speciality</td><td>:</td>
+                        <td>{{obj.Speciality}}</td>
+                    </tr>
+                    <tr>
+                        <td>Opning_Time</td><td>:</td>
+                        <td>{{obj.Opning_Time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Closing_Time</td><td>:</td>
+                        <td>{{obj.Closing_Time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Consultation Fee</td><td>:</td>
+                        <td>{{obj.Consultation_Fee}}</td>
+                    </tr>
+                    <tr>
+                        <td>Contact No</td><td>:</td>
+                        <td>{{obj.Mobile_No}}</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td><td>:</td>
+                        <td>{{obj.Address}}</td>
+                    </tr>
+                </table>
+            </mat-card-content>    
+            <mat-card-actions align='end'>
+                <button mat-raised-button class="Btn" *ngIf="Request=='Approved'" color="primary" (click)="EditDoctor(obj)">Edit</button>
+                <button mat-raised-button class="Btn" *ngIf="Request!='Not Approved'" color="accent" (click)="ResponseRegistrationRequest(obj,'Not Approved')">Cancel</button>
+                <button mat-raised-button class="Btn" *ngIf="Request!='Approved'" color="primary" (click)="ResponseRegistrationRequest(obj,'Approved')">Accept</button>
+                <button mat-raised-button class="Btn"  color="warn" (click)="DeleteDoctor(obj)">Delete</button>
+            </mat-card-actions>
+        </mat-card>
+        <mat-paginator style="width: 80%; margin: auto;" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </mat-tab>
+    <mat-tab label="Notification">
+        <mat-card *ngFor="let obj of AllNotification;">
+            <mat-card-header>
+                <mat-card-title>{{obj.UserType}}</mat-card-title>
+            </mat-card-header> 
+            <mat-card-content>
+                <div style="text-align: left;">
+                    {{obj.Text}}
+                </div>
+                <div style="text-align: right;">
+                    {{obj.Time}}
+                </div>
+            </mat-card-content>
+            <mat-card-actions align='end'>
+                <button mat-raised-button class="Btn" color="warn" (click)="DeleteNotification(obj)">Delete</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>  
+    <mat-tab label="Speciality">
+        <mat-card *ngFor="let obj of AllSpeciality;">
+            <mat-card-header>
+                <mat-card-title>{{obj.Name}}</mat-card-title>
+            </mat-card-header>    
+            <mat-card-actions align='end'>
+                <button mat-raised-button class="Btn" color="warn" (click)="DeleteSpeciality(obj)">Delete</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>  
+</mat-tab-group>
+
+<div *ngIf="IsProgressing" class="progress">
+    <mat-spinner></mat-spinner>
+</div>

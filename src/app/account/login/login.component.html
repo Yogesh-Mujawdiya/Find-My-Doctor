@@ -1,0 +1,30 @@
+<mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title>Login</mat-card-title>
+      <mat-card-subtitle>Welcome Back</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>    
+    <form (submit)="Login()">
+      <mat-card-content>
+          <mat-form-field appearance="outline">
+              <mat-label>Mobile No.</mat-label>
+              <input id="Id" matInput name="Mobile_No" [(ngModel)]="Mobile_No" required>
+          </mat-form-field><br>
+          <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input id="Pass" matInput name="Pass" [(ngModel)]="Password" [type]="hide ? 'password' : 'text'" required>
+              <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+          </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button id="Login" type="submit" class="Btn"  color="primary">Login</button><br>
+        <button disabled mat-button class="Btn" color="primary">Forget Password</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+  <div *ngIf="IsProgressing" class="progress">
+    <mat-spinner></mat-spinner>
+  </div>

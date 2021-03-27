@@ -1,0 +1,94 @@
+<mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title>Sign Up</mat-card-title>
+      <mat-card-subtitle>Create a New Account</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>    
+    <form>
+    <mat-card-content>
+        <mat-button-toggle-group name="UserType" [(ngModel)]="UserType" color="warm">
+            <mat-button-toggle value="Customer">Customer</mat-button-toggle>
+            <mat-button-toggle value="Doctor">Doctor</mat-button-toggle>
+        </mat-button-toggle-group><br>
+        <mat-form-field appearance="outline">
+            <mat-label>Full Name</mat-label>
+            <input matInput type="text" name="name" [(ngModel)]="Name" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Mobile No.</mat-label>
+            <input matInput type="text" name="Mobile_No" [(ngModel)]="Mobile_No" minlength="10" maxlength="10" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput name="Password" [(ngModel)]="Password" [type]="hide ? 'password' : 'text'" required>
+            <button  type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Location'">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field *ngIf="UserType=='Customer'" appearance="outline">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput  name="Date_of_Birth" [(ngModel)]="Date_of_Birth" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div *ngIf="UserType=='Customer'" style="text-align: left; width: 75%; margin: auto;">
+            <label style="margin:10px;">Gender</label>
+            <mat-radio-group color="primary" name="gender" [(ngModel)]="Gender">
+                <mat-radio-button value="M">Male</mat-radio-button>
+                <mat-radio-button value="F">Female</mat-radio-button>
+                <mat-radio-button value="O">Other</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <mat-form-field *ngIf="UserType=='Doctor'" appearance="outline">
+            <mat-label>Speciality</mat-label>
+            <input type="text"
+             placeholder="Select Speciality"
+             matInput
+             name="Speciality" [(ngModel)]='Speciality'
+             [formControl]="myControl"
+             [matAutocomplete]="auto" required>
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field *ngIf="UserType=='Doctor'" appearance="outline">
+            <mat-label>Hospital/Clinic Name</mat-label>
+            <input matInput  name="Hospital_Name" [(ngModel)]="Hospital_Name" type="text" required>
+        </mat-form-field>
+        <mat-form-field *ngIf="UserType=='Doctor'" appearance="outline">
+            <mat-label>Address</mat-label>
+            <textarea matInput type="text" name="Address" required [(ngModel)]='Address'></textarea>
+            <button  type="button" mat-icon-button matSuffix (click)="GetAddress()">
+                <mat-icon>location_on</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field *ngIf="UserType=='Doctor'" appearance="outline">
+            <mat-label>Consultation Fee</mat-label>
+            <input matInput type="number" name="Consultation_Fee" [(ngModel)]="Consultation_Fee" name="Consultation_Fee" required />
+            <button  type="button" style="margin: -10px;" mat-icon-button matSuffix>
+                <span style="font-size: large; margin-top: -15px;">&#8377;</span>
+            </button>
+        </mat-form-field>
+        <div *ngIf="UserType=='Doctor'" style="text-align: left; width: 75%; margin: auto;margin-bottom: 5px;padding-left: 10px;">Visit Time</div>
+        <mat-form-field *ngIf="UserType=='Doctor'" style="width: 35%; margin-right: 2.5%;" appearance="outline">
+            <mat-label>Opning Time</mat-label>
+            <input matInput type="time" name="Open_Time" [(ngModel)]="Open_Time" name="Visit_Time" required />
+        </mat-form-field>
+        <mat-form-field *ngIf="UserType=='Doctor'" style="width: 35%; margin-left: 2.5%;" appearance="outline">
+            <mat-label>Closing Time</mat-label>
+            <input matInput type="time" name="CTime" [(ngModel)]="Close_Time" name="Visit_Time" required />
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button class="Btn" (click)="SignUp()" type="submit"  color="primary">Register</button><br>
+      <button mat-button (click)="GoTo('/Account/Login')" class="Btn" type="button" color="primary">Alrady Have an Account</button>
+    </mat-card-actions>
+</form>
+</mat-card>
+
+<div *ngIf="IsProgressing" class="progress">
+    <mat-spinner></mat-spinner>
+  </div>

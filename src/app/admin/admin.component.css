@@ -1,0 +1,16 @@
+section{
+    margin: auto;
+    text-align: center;
+}
+mat-button-toggle-group{
+    margin: 10px;
+    max-width: 800px;
+    width: 80%;
+}
+.mat-button-toggle-checked{
+  background-color: #9d00a2;
+  color: white;
+}
+mat-button-toggle{
+    width: 100%;
+}

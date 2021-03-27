@@ -1,0 +1,75 @@
+
+
+<form style="text-align: center;">
+    <mat-form-field appearance="outline" style="width: 80%;">
+        <mat-label>Search</mat-label>
+        <input matInput type="text" name="search" [(ngModel)]="searchText" (keyup)="SearchData()"
+        autocomplete="off" placeholder="Search Doctor By : Hospital Name / Dr. Name  / Speciality / Address">
+        <button mat-icon-button matSuffix>
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 80%;">
+        <mat-label>Choose Doctor Specialization</mat-label>
+        <mat-select name='SelectedSpeciality' [(ngModel)]="SelectedSpeciality" (selectionChange)="ChangeSpeciality()">
+            <mat-option *ngFor="let S of Speciality" [value]="S">
+            {{S}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <section *ngIf="searchText!='' || SelectedSpeciality!=''">
+        Sort By<br>
+        <mat-button-toggle-group [(ngModel)]="SortBy" (change)="ChangeSortingType()" name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="Distance">Distance</mat-button-toggle>
+            <mat-button-toggle value="Fee">Consultation Fee</mat-button-toggle>
+        </mat-button-toggle-group>
+    </section>
+</form>
+<div *ngIf="searchText!='' || SelectedSpeciality!=''">
+<mat-card *ngFor="let obj of obs | async;">
+    <mat-card-header>
+        <mat-card-title>{{obj.Hospital_Name}}</mat-card-title>
+        <mat-card-subtitle>Dr. {{obj.Full_Name}}</mat-card-subtitle>
+        <span style="flex: 1 1 auto;">
+            <mat-chip-list style="float:right;">
+                <mat-chip color="accent" selected>
+                    Distance : {{obj.Distance}} K.M.
+                </mat-chip>
+            </mat-chip-list>
+        </span>
+    </mat-card-header>
+    <mat-divider></mat-divider>    
+    <mat-card-content> 
+        <table>
+            <tr>
+                <td>Speciality</td><td>:</td>
+                <td>{{obj.Speciality}}</td>
+            </tr>
+            <tr>
+                <td>Opning_Time</td><td>:</td>
+                <td>{{obj.Opning_Time}}</td>
+            </tr>
+            <tr>
+                <td>Closing_Time</td><td>:</td>
+                <td>{{obj.Closing_Time}}</td>
+            </tr>
+            <tr>
+                <td>Consultation Fee</td><td>:</td>
+                <td>{{obj.Consultation_Fee}}</td>
+            </tr>
+            <tr>
+                <td>Contact No</td><td>:</td>
+                <td>{{obj.Mobile_No}}</td>
+            </tr>
+            <tr>
+                <td>Address</td><td>:</td>
+                <td>{{obj.Address}}</td>
+            </tr>
+        </table>
+    </mat-card-content>
+    <mat-card-actions align='end'>
+        <button mat-raised-button class="Btn"  color="primary" (click)="SetAppointment(obj)">Set Appointment</button>
+    </mat-card-actions>
+</mat-card>
+<mat-paginator style="width: 85%;margin: auto;" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

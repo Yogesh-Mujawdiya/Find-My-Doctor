@@ -1,0 +1,33 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+header{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 2;	
+    box-shadow: 
+    -5px -5px 5px rgba(255, 255, 255, 0.05),
+    5px 5px 5px rgba(0, 0, 0, 0.3),
+    inset -5px -5px 5px rgba(255, 255, 255, 0.05),
+    inset 5px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.Menu-Btn{
+    margin: 10px;
+}
+
+section{
+    margin: auto;
+    text-align: center;
+}
+mat-button-toggle-group{
+    margin: 10px;
+}
+.mat-button-toggle-checked{
+  background-color: #9d00a2;
+  color: white;
+}
+mat-button-toggle{
+    width: 200px;
+}
